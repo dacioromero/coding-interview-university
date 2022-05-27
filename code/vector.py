@@ -5,7 +5,6 @@ T = TypeVar('T')
 
 class Vector(Generic[T]):
   def __init__(self) -> None:
-    # Using a tuple because it's closest to a fixed-size array
     self._list: List[Optional[T]] = [None] * 16
     self._size = 0
 
@@ -47,10 +46,10 @@ class Vector(Generic[T]):
     if 0 > index >= self._size:
       raise IndexError()
 
-    # !! Potential optimaztion to perform insertion and resize simultaneously
+    # !! Potential optimization to perform insertion and resize simultaneously
     # 1. Allocate new array
     # 2. Copy elements from old array up to index
-    # 3. Set element at index
+    # 3. Set `item` at index
     # 4. Copy elements up to index with indices incremented by 1
     # 5. Set new array as current
     if self._size == self.capacity():
